@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Add New Employee
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <form name="editForm" #editForm="ngForm" (ngSubmit)="save()" novalidate>
+      <ion-list>
+        <ion-item>
+          <ion-label>EmpId ::- </ion-label>
+          <ion-input name="empId" [(ngModel)]="emp.empId" readonly></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Name ::- </ion-label>
+          <ion-input name="empName" [(ngModel)]="emp.empName" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Department ::- </ion-label>
+            <ion-input name="deptName" [(ngModel)]="emp.deptName" required></ion-input>
+          </ion-item>  
+      </ion-list>
+      <ion-button [disabled]="editForm.form.invalid" (click)="save()" >Save</ion-button>
+    </form>
+</ion-content>

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button (click) ="changeStyle()">
+        {{ tablestyle }}
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Employee Details 
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+  </ion-refresher-content>
+</ion-refresher>
+    <ion-list>
+      <ion-item>
+        <ion-label>Employee Details</ion-label>
+        <ion-icon slot="start" color="primary" name="add-circle"  [routerLink]="['/','AddEmployee']"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <ngx-datatable
+  [rows]="emplList"
+  [ngClass]="tablestyle"
+  [rowHeight]="'auto'"
+  [headerHeight]="50"
+  [columnMode]="'force'">
+  <ngx-datatable-column name="EmpId"></ngx-datatable-column>
+  <ngx-datatable-column name="EmpName"></ngx-datatable-column>
+  <ngx-datatable-column name="DeptName"></ngx-datatable-column>
+
+  <ngx-datatable-column name="Actions" sortable="false">
+    <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <ion-icon slot="end" color="primary" name="create" [routerLink]="['/','UpdateEmployee',row.empId]" ></ion-icon>
+      <ion-icon slot="end" color="danger" name="trash" (click)="deleteEmployee(row.empId)"></ion-icon>
+    </ng-template>
+  </ngx-datatable-column>
+
+  </ngx-datatable>
+    
+</ion-content>
